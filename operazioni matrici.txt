@@ -1,0 +1,366 @@
+-Elementi contigui/adiacenti
+-Somma colonne/righe
+-Minimo/Massimo tra righe e colonne
+-Matrice trasposta
+-Matrice Triangolare superiore/inferiore
+-check palindroma
+-stringhe sorelle
+-elementi nulli
+-valore assoluto
+-pari e dispari
+-sequenza monotona
+-somma elementi al disopra e al disotto della diagonale
+-differenti indici di riga e di colonna
+-numeri random
+-numero pseudo-casuale
+-multipli
+-librerie e cstring
+
+1-contigui/adiacenti  (i contigui possiamo utilizzarli anche per cercare le sottomatrici)
+
+/*esempio di contigui con sottomatrici da una matrice m x n a una matrice n x n
+int es1(double*** A, int m, int n, short k, double q){
+    int ritorno = 0;
+    double somma;
+    for(int i=0; i<=m-n; i++){
+        for(int j=0; j<n-1; j++){
+            somma = 0;
+            counter = 0;
+            if(A[i][j]){
+                for(int z=j; z<k+j; z++){
+                    if(A[z][z]){
+                        somma += *A[z+i][z];
+                    }
+                }
+                double media = somma/k;
+                 if(media >= q){
+                    ritorno++;
+                }
+            }
+        }
+    }
+    return ritorno;
+}*/
+
+
+void Matrice(int** A, int n, int m){
+    for(int i=0; i<n-1; i++){
+        for(int j=0; j<m; j++){
+            cout << A[i][j]<< " \t";
+        }
+    }
+}
+
+oppure 
+for(int i=0; i<n; i++){
+    for(int j=0; j<m; j++){
+        ...
+            for(int p=i; p<n; p++){
+                ...
+            }
+    }
+}
+
+
+
+2-somma colonne/righe o concatenazione righe di una stringa
+void Matrice(int** A, int n, int m){
+    int riga;
+    for(int i=0; i<n; i++){
+        riga = 0;
+        for(int j=0; j<m; j++){
+            riga += A[i][j];
+        }
+    }
+    int colonna;
+    for(int j=0; j<m; j++){
+        colonna=0;
+        for(int i=0; i<n; i++){
+            colonna += A[i][j];
+        }
+    }
+}
+
+3-Minimo/massimo righe e colonne
+//massimo
+template<class T>
+#include <INT_MAX>
+
+T* findMaxOnRows(T M[][N]) {
+    T* s = new T[N];
+    for(int i = 0; i < N; i++) {
+        s[i] = INT_MIN;
+        for(int j = 0; j < N; j++) {
+            if(M[i][j] > s[i]) s[i] = M[i][j];
+        }
+    }
+    return s;
+}
+//minimo
+template<class T>
+T* findMinOnRows(T M[][N]) {
+    T* s = new T[N];
+    for(int i = 0; i < N; i++) {
+        s[i] = INT_MAX;
+        for(int j = 0; j < N; j++) {
+            if(M[i][j] < s[i]) s[i] = M[i][j];
+        }
+    }
+    return s;
+}
+
+4-Matrice trasposta (La matrice trasposta è una matrice dove le righe e le colonne si invertono)
+void Matrice(int**A , int n){
+    bool** BT = new bool*[n];
+    for(int i=0; i<n; i++){
+        BT[i]= new bool[n];
+        for(int j=0; j<n; j++){
+            BT[i][j] += B[j][i];
+            cout << BT[i][j]<< " ";
+        }
+        cout << endl;
+    }
+}
+
+oppure if(B[i][j] == B[j][i]){
+    ...
+}
+
+5-Matrice triangolare superiore e inferiore
+//triangolare superiore
+bool esercizio19(short** M, int n){
+int counter =0;
+    for(int i = 0; i<n; i++){
+        for(int j = i; j<n; j++){
+            cout << M[i][j] << endl;
+            if(M[i][j] == 0 ){
+                counter++;
+            }
+        }
+        
+    }
+
+    if(counter == ((n*n)-n)/2){
+        return true;
+    }
+
+    //Triangolare inferiore
+    for(int i = 0; i<n; i++){
+        for(int j =0; j<i+1; j++){
+            cout << M[i][j] << endl;
+            if(M[i][j] == 0){
+               counter++;
+            }
+        }
+        if(counter == ((n*n)-n)/2){
+        return true;
+        }    
+    }
+}  
+
+6-Check palindroma
+bool Check_Palindroma(string s){
+    string p = "";
+    for(int i = 0; i < s.length(); i++){
+        p = s[i] + p;
+    }
+    return p == s;
+}
+
+7-stringhe sorelle (Due stringhe si dicono sorelle se hanno lo stesso numero di vocali.)
+bool stringa(string***S, int n, int m){
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            int lunghezza = (*S[i][j]).length();
+            for(int p= i + 1; p<n; p++){
+                int lunghezza2 = (*S[p][j]).length();
+                if(lunghezza == lunghezza2){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+8-elementi nulli
+void Matrice(int** A, int n , int m){
+    int counter = 0; //controllo elementi nulli
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            int a += A[i][j];
+            counter++;
+            double media = (double)a/counter; //media senza gli elementi nulli
+        }
+    }
+}
+
+
+9-valore assoluto 
+if(temp < 0){
+    temp = temp *(-1); //temp uguale variabile temporale
+}
+
+10-pari e dispari con i caratteri
+void Matrice(string** A, int n){
+    string t = "";
+    string s = "";
+    int counter_caratteri=0;
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            s = A[i][i];
+            t = A[i][j];
+            for(int x = 0; x<s.length(); x+=2){ //pari
+                for(int y = 1; y<t.length(); t+=2){ //dispari
+                    if(s[x] == t[y]){
+                        counter_caratteri++;
+                    }
+                }
+            }
+        }
+    }
+}
+
+11-sequenza monotona
+void Matrice(int** A, int n, int m){
+int sequenza;
+    for(int j=0; j<m; j++){
+        sequenza = 0;
+        for(int i=0; i<n-1; i++){
+            if(A[i][j] == A[i+1][j] || (A[i][j] + 1) == A[i+1][j]){
+                sequenza++;
+            }else{
+                sequenza = 1;
+            }
+        }
+    }
+}
+
+
+12-somma elementi al di sopra della diagonale principale
+void sum(int** A, int n){
+    int somma;
+    for(i=0;i<n-1;i++){
+        int somma = 0;
+        for(j=i+1;j<n;j++){
+            somma+=a[i][j];
+        }
+    }
+}
+
+//somma elementi sottostante la diagonale secondaria
+void sum(int** A, int n){
+    int somma;
+    for(int i=0; i+1<n; i++){
+        somma += A[i + 1][n -i - 1];
+    }
+}
+
+13-differenti indici di riga e di colonna
+bool esercizio9(string** A, int n, int m,string s){
+    int contatore=0;
+    int riga;
+    int colonna;
+    for(int i=0; i<n; i++){
+            if(contatore != 1){
+                for(int j=0; j<m; j++){
+                    if(contatore != 1){
+                    if(A[i][j].find(s) != string::npos){
+                        contatore++;
+                        riga = i;
+                        colonna = j;
+                    }
+                }
+            }
+        }
+    }
+    for(int i = 0; i<n; i++){
+        for(int j = 0; j<m; j++){
+            if(A[i][j].find(s) != string::npos && i != riga && j != colonna){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+14-Numeri random
+double = rand()/(double)RAND_MAX/((b - a + 1) + a);
+double tra 0 e 1 = 0 + (rand()/(double)RAND_MAX/(1 - 0));
+
+int = rand()%(b - a + 1) + a;
+
+se è compreso tra due numeri negativi
+int = (rand()%(b - a + 1) + a) *(-1);
+
+float: 
+srand(time(NULL));
+for(int i = 0; i<n; i++){
+    *A[i] = rand() / static_cast<float>(RAND_MAX);
+}
+
+15-copia della matricen cui ogni numero di una singola colonna della 
+matrice di origine che risulti presente almeno  s volte nella colonna stessa sia sostituito, nella 
+corrispondente colonna della matrice copia, con un numero pseudo-casuale negativo appartenente
+all'intervallo [-b, -a].
+
+
+int*** esame1(int*** M, int n, int m, int a, int b, short s){
+    int*** C = new int**[n];
+    for(int i=0; i<n; i++){
+        C[i] = new int*[n];
+    }
+
+    for(int j=0; j<m; j++){
+        for(int i=0; i<n; i++){
+            C[i][j] = M[i][j];
+        }
+    }
+
+    for(int j=0; j<m; j++){
+        for(int i=0; i<n; i++){
+            int colonne = 0;
+            if(M[i][j]){
+                int temp = *M[i][j];
+                for(int t= 0; t<n; t++){
+                    if(temp == *M[t][j]){
+                        colonne++;
+                    }
+                }
+                srand(time(nullptr));
+                if(colonne >= s){
+                    for(int p=0; p<n; p++){
+                        if(*C[p][j] == temp){
+                            *C[p][j] = (rand()%(b - a + 1) + a) *(-1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return C;
+}
+
+//multipli
+if(vec[i] % n != 0){ // non multiplo
+    vec[i] = ...
+}
+if(vec[i] % n == 0) // multiplo
+
+//librerie e cstring
+round() es (2, 2 = 2 2,8= 3) 
+ceil() es (2,2 = 3, 2,6= 3)
+floar() es (2,8= 2) 
+
+#include <cstdlib>  per utilizzare INT_MIN E INT_MAX
+#include <cflaot> DBL_MIN e DBL_MAX
+
+ricorda una c string finisce sempre con '\0' quindi se devi trovare un carattere while(S[i][i][a] != '\0')
+se c'è scritto "se esiste una colonna o una riga " il valore deve essere inizializzato all'interno del ciclo for es:
+int colonne_palindrome;
+for(int j=0; j<m; j++){
+    colonne_palindrome = 0;
+    for(int i=0; i<n; i++){
+        ...
+    }
+}

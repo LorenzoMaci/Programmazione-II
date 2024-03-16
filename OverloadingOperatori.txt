@@ -1,0 +1,89 @@
+//OVERLOADING OPERATOR[]
+
+//parte nell classe
+int& operator[](short i){
+    return arr[i % len];
+}
+
+//Parte nel main
+cout << (*vett[5]) << endl;
+(*vett[5])[0] = 3;
+cout << (*vett[5]) << endl;
+
+(Se l'overloading dell'operatore non si deve fare nella classe madre: Main: ((B*)vett[2])->operator[](2) = 1000;)
+
+//OVERLOADING OPERATOR<<
+
+//Parte nella classe A
+virtual ostream& put(ostream& os){
+    os << typeid(*this).name() << ", arr=[ ";
+    for(int i = 0; i<len; i++){
+        os << arr[i] << " ";
+    }
+    os << "], ";
+    return os;
+}
+
+//Tra classe A e classe B (non a membro)
+ostream& operator<<(ostream& os, A& obj){
+    return obj.put(os);
+}
+
+//Parte nella classe B
+ostream& put(ostream& os){
+    A::put(os);
+    os << "p=" << p << ", func(3)=" << func(3);
+    return os;
+}
+
+//Parte nella classe C
+ostream& put(ostream& os){
+    A::put(os);
+    os << "t=" << t << ", func(3)=" << func(3);
+    return os;
+}
+
+//Parte nel main
+for(int i = 0; i<DIM; i++){
+    cout << i << ") " << *vett[i] << endl;
+}
+
+//OVERLOADING OPERATORE MEMBRO POSTFISSO ++
+
+//Parte nella classe
+B* operator++(int){
+    p++;
+    return this;
+}
+
+//Parte nel main
+cout << "5): " << *vett[5] << endl;
+cout << "5): " << *((*(dynamic_cast<B*>(vett[5])))++) << endl;
+
+//OVERLOADING OPERATORE MEMBRO PREFISSO ++
+
+//Parte nella classe
+B* operator++(){
+    ++p;
+    return this;
+}
+
+//Parte nel main
+cout << "0) " << *vett[0] << endl;
+cout << "0) " << *(++(*((B*)vett[0]))) << endl;
+
+//OVERLOADING OPERATOR()
+/* La funzione dll'overloading prende due argomenti i1 e i2 e restituisce la somma di tutti gli elementi presenti nel vettore, dall'indice i1 all'indice i2 */
+
+//Parte nell classe
+int operator()(int i1, int i2){
+    int somma = 0;
+    for(int i = i1; i<=i2; i++){
+        somma += vec[i];
+        }
+    return somma;
+}
+
+//Parte nel main
+cout << "vett[10]=" << *vett[10] << endl;
+cout << "vett[10](2, 3)=" << (*vett[10])(2, 3) << endl;
